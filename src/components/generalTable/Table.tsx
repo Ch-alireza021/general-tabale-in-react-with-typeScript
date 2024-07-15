@@ -1,25 +1,21 @@
 import React from "react";
 import { TableBody, TableHead } from "./base";
+import { Pagination } from "./pagination";
+import { CTHeaderItemIF, CTHItemIF, CTStyleIF } from "./interface";
 
-// Define the types for the props
-// interface HeaderItem {
-//   title: string;
-//   value: () => any;
-// }
 interface TableProps {
-  header: {
-    title: string;
-    value: (item: { [key: string]: string }) => React.ReactNode;
-  }[];
-  items: { [key: string]: string }[];
-  style: {
-    HBG: string | undefined;
-    HTC: string | undefined;
-    BBG: string[] | undefined;
-  };
+  header: CTHeaderItemIF[];
+  items: CTHItemIF[];
+  style: CTStyleIF;
+  caption: React.ReactNode | undefined;
 }
 
-export const CTable: React.FC<TableProps> = ({ header, items, style }) => {
+export const CTable: React.FC<TableProps> = ({
+  header,
+  items,
+  style,
+  caption,
+}) => {
   return (
     <div
     //   style={{
@@ -38,6 +34,7 @@ export const CTable: React.FC<TableProps> = ({ header, items, style }) => {
         }}
       >
         {/* You can add a title or any other component here */}
+        {caption ? caption : ""}
       </div>
       <table style={{ minWidth: "500px", direction: "rtl" }}>
         <TableHead {...{ header, style }} />
@@ -50,10 +47,7 @@ export const CTable: React.FC<TableProps> = ({ header, items, style }) => {
           alignItems: "center",
         }}
       >
-        {/* <CustomPagination
-          handlePage={handlePage}
-          {...props}
-        /> */}
+        <Pagination />
       </div>
     </div>
   );
