@@ -1,16 +1,18 @@
 import "./App.css";
-import { Table } from "./components";
+import { CTable } from "./components";
 
 
 
 function App() {
-  const header = [{ title: "name", value: (row: Record<string, string>) => row?.name }];
-  const items = [{ name: "alireza" }];
+  const header = [{ title: "name", value: (row: Record<string, string>) => row?.name }
+    ,{ title: "last name", value: (row: Record<string, string>) => row?.lName }
+  ];
+  const items = [{ name: "alireza",lName:'chizi' },{ name: "majid",lName:'mizi' }];
 
   return (
-    <>
-      <Table {...{ header, items }} />
-    </>
+    <div style={{display:"flex",justifyContent:'center'}}>
+      <CTable {...{ header, items }} />
+    </div>
   );
 }
 
