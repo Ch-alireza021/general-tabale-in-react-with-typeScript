@@ -2,15 +2,23 @@ import React from "react";
 
 interface TableHeadProps {
   header: { title: string; value: any }[];
+  style: {
+    HBG: string | undefined;
+    HTC: string | undefined;
+    BBG: string[] | undefined;
+  };
 }
 
-export const TableHead: React.FC<TableHeadProps> = ({ header: items = [] }) => {
+export const TableHead: React.FC<TableHeadProps> = ({
+  header: items = [],
+  style,
+}) => {
   return (
     <thead>
       <tr
         style={{
           direction: "rtl",
-          backgroundColor: "#2e71a7",
+          background: style?.HBG ? style?.HBG : "#2e71a7",
           borderRadius: " 20px 20px 0 0 ",
         }}
       >
@@ -31,10 +39,10 @@ export const TableHead: React.FC<TableHeadProps> = ({ header: items = [] }) => {
             <div
               style={{
                 width: "100%",
-                backgroundColor: "#2e71a7",
+                background: style?.HBG ? style?.HBG : "#2e71a7",
                 padding: "20px 0",
                 borderRadius: " 20px 20px 20px 20px ",
-                color: "white",
+                color: style?.HTC ? style?.HTC : "white",
               }}
             >
               {item.title}

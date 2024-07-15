@@ -1,19 +1,25 @@
-
-import React from 'react';
-import { TableBody, TableHead } from './base';
+import React from "react";
+import { TableBody, TableHead } from "./base";
 
 // Define the types for the props
-interface HeaderItem {
-  title: string;
-  value: () => any;
-}
-
+// interface HeaderItem {
+//   title: string;
+//   value: () => any;
+// }
 interface TableProps {
-  header: HeaderItem[];
-  items: Record<string, string>[];
+  header: {
+    title: string;
+    value: (item: { [key: string]: string }) => React.ReactNode;
+  }[];
+  items: { [key: string]: string }[];
+  style: {
+    HBG: string | undefined;
+    HTC: string | undefined;
+    BBG: string[] | undefined;
+  };
 }
 
-export const CTable: React.FC<TableProps> = ({ header, items }) => {
+export const CTable: React.FC<TableProps> = ({ header, items, style }) => {
   return (
     <div
     //   style={{
@@ -24,21 +30,25 @@ export const CTable: React.FC<TableProps> = ({ header, items }) => {
     //   }}
     >
       <div
-        // style={{
-        //   display: 'flex',
-        //   justifyContent: 'center',
-        //   alignItems: 'center',
-        //   padding: 3,
-        // }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "12px",
+        }}
       >
         {/* You can add a title or any other component here */}
       </div>
-      <table style={{minWidth:"500px",direction: "rtl",}}>
-        <TableHead {...{header}} />
-        <TableBody {...{header,items}} />
+      <table style={{ minWidth: "500px", direction: "rtl" }}>
+        <TableHead {...{ header, style }} />
+        <TableBody {...{ header, items, style }} />
       </table>
       <div
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         {/* <CustomPagination
           handlePage={handlePage}

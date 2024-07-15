@@ -1,17 +1,22 @@
 import "./App.css";
 import { CTable } from "./components";
 
-
-
 function App() {
-  const header = [{ title: "name", value: (row: Record<string, string>) => row?.name }
-    ,{ title: "last name", value: (row: Record<string, string>) => row?.lName }
+  const header = [
+    { title: "name", value: (row: Record<string, string>) => row?.name },
+    { title: "last name", value: (row: Record<string, string>) => row?.lName },
   ];
-  const items = [{ name: "alireza",lName:'chizi' },{ name: "majid",lName:'mizi' }];
+  const items = [
+    { name: "alireza", lName: "chizi" },
+    { name: "majid", lName: "mizi" },
+    { name: "alireza", lName: "chizi" },
+    { name: "majid", lName: "mizi" },
+  ];
+  const style = { HBG: "red", HTC: "black", BBG: [] };
 
   return (
-    <div style={{display:"flex",justifyContent:'center'}}>
-      <CTable {...{ header, items }} />
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <CTable {...{ header, items, style }} />
     </div>
   );
 }
