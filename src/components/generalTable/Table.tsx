@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TableBody, TableHead } from "./base";
 import { Pagination } from "./pagination";
 import { CTHeaderItemIF, CTHItemIF, CTStyleIF } from "./interface";
@@ -16,14 +16,24 @@ export const CTable: React.FC<TableProps> = ({
   style,
   caption,
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+const total=200
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <div
-    //   style={{
-    //     width: '80vw',
-    //     background: '#ffffff34',
-    //     borderRadius: '20px',
-    //     paddingBottom: '20px',
-    //   }}
+      style={{
+        width: '80vw',
+        background: '#ffffff34',
+        borderRadius: '20px',
+        paddingBottom: '20px',
+      }}
+      
     >
       <div
         style={{
@@ -47,7 +57,12 @@ export const CTable: React.FC<TableProps> = ({
           alignItems: "center",
         }}
       >
-        <Pagination />
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          totalItems={total}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
       </div>
     </div>
   );

@@ -13,6 +13,3 @@ export interface CTStyleIF {
     HTC: string | undefined;
     BBG: string[] | undefined;
   };
-
-// CTCaption ---> CTable-Caption-interface
-export interface CTCaptionIF { };
