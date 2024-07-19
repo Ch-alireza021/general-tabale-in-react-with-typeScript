@@ -8,6 +8,7 @@ interface TableProps {
   items: CTHItemIF[];
   style: CTStyleIF;
   caption: React.ReactNode | undefined;
+  pagination:string |undefined
 }
 
 export const CTable: React.FC<TableProps> = ({
@@ -15,10 +16,12 @@ export const CTable: React.FC<TableProps> = ({
   items,
   style,
   caption,
+  pagination
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   // Get current items
+  const itemsLength = items?.length ||0;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
@@ -29,9 +32,9 @@ const total=200
     <div
       style={{
         width: '80vw',
-        background: '#ffffff34',
-        borderRadius: '20px',
-        paddingBottom: '20px',
+        // background: '#ffffff34',
+        // borderRadius: '20px',
+        // paddingBottom: '20px',
       }}
       
     >
@@ -46,10 +49,17 @@ const total=200
         {/* You can add a title or any other component here */}
         {caption ? caption : ""}
       </div>
-      <table style={{ minWidth: "500px", direction: "rtl" }}>
+      <table style={{ minWidth: "500px", direction: "rtl",width:'100%' }}>
         <TableHead {...{ header, style }} />
-        <TableBody {...{ header, items, style }} />
+        <TableBody {...{ header, items, style,pagination }} />
       </table>
+        <Pagination
+        {...{style,itemsLength}}
+          itemsPerPage={itemsPerPage}
+          totalItems={total}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
       <div
         style={{
           display: "flex",
@@ -57,12 +67,7 @@ const total=200
           alignItems: "center",
         }}
       >
-        <Pagination
-          itemsPerPage={itemsPerPage}
-          totalItems={total}
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-        />
+        
       </div>
     </div>
   );

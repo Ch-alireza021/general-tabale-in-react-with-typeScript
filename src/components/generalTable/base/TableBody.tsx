@@ -8,12 +8,14 @@ interface TableBodyProps {
     HTC?: string;
     BBG?: string[];
   };
+  pagination:string|undefined
 }
 
 export const TableBody: React.FC<TableBodyProps> = ({
   items = [],
   header = [],
   style,
+  pagination
 }) => {
   const color = [
     style?.BBG?.[0] || "#333333e0",
@@ -33,9 +35,9 @@ export const TableBody: React.FC<TableBodyProps> = ({
     itemIndex,
     colIndex,
   }: SetBorderParams): BorderStyles | null => {
-    if (itemIndex === items.length - 1 && colIndex === header.length - 1) {
+    if (itemIndex === items.length - 1 && colIndex === header.length - 1 && !pagination) {
       return { borderRadius: "0 0  0 20px" };
-    } else if (itemIndex === items.length - 1 && colIndex === 0) {
+    } else if (itemIndex === items.length - 1 && colIndex === 0 && !pagination) {
       return { borderRadius: "0 0 20px 0 " };
     }
     return null;

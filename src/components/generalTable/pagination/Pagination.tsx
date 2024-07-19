@@ -1,19 +1,28 @@
 // import React from 'react'
 import { FC } from "react";
 import "./pagination.css";
-interface PaginationIF{
-  itemsPerPage:number
-  totalItems:number
-  currentPage:number
-  setCurrentPage:(state: number) => void
+import { CTStyleIF } from "../interface";
+interface PaginationIF {
+  itemsPerPage: number;
+  totalItems: number;
+  currentPage: number;
+  setCurrentPage: (number: number) => void;
+  style: CTStyleIF;
+  itemsLength: number;
 }
 
-export const Pagination:FC<PaginationIF> = ({
+export const Pagination: FC<PaginationIF> = ({
   itemsPerPage,
   totalItems,
   currentPage,
   setCurrentPage,
+  style,
+  itemsLength,
 }) => {
+  const color = [
+    style?.BBG?.[0] || "#333333e0",
+    style?.BBG?.[1] || "#00000080",
+  ];
   const max = Math.ceil(totalItems / itemsPerPage);
   const pageNumbers = [];
   const first =
@@ -27,11 +36,15 @@ export const Pagination:FC<PaginationIF> = ({
   for (let i = first; i <= last; i++) {
     pageNumbers.push(i);
   }
-  console.log({ last });
-  console.log(max - 2, "las");
   const threeDot = [1, 2, 3];
   return (
-    <nav style={{background:'black',width:'100%'}}>
+    <nav
+      style={{
+        background: color[itemsLength % 2],
+        width: "100%",
+        borderRadius: " 0  0 20px  20px ",
+      }}
+    >
       <ul className="pagination">
         {first !== 1 && (
           <div
@@ -52,7 +65,7 @@ export const Pagination:FC<PaginationIF> = ({
                   display: "inline-block",
                   width: "5px",
                   height: "5px",
-                  background: "gray",
+                  background: color[itemsLength % 2 ? 0 : 1],
                   borderRadius: "50px",
                 }}
               ></div>
@@ -85,7 +98,7 @@ export const Pagination:FC<PaginationIF> = ({
                   display: "inline-block",
                   width: "5px",
                   height: "5px",
-                  background: "gray",
+                  background: color[itemsLength % 2 ? 0 : 1],
                   borderRadius: "50px",
                 }}
               ></div>

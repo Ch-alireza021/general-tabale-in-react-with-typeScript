@@ -11,12 +11,14 @@ function App() {
     { name: "majid", lName: "mizi" },
     { name: "alireza", lName: "chizi" },
     { name: "majid", lName: "mizi" },
+    { name: "majid", lName: "mizi" },
+
   ];
   const style = { HBG: "red", HTC: "black", BBG: [] };
   const caption='salam'
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      <CTable {...{ header, items, style,caption}} />
+      <CTable {...{ header, items, style,caption,pagination:'pagination'}} />
     </div>
   );
 }
